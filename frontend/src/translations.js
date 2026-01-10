@@ -3,7 +3,7 @@
 export const translations = {
   ro: {
     // Header
-    brandName: "🎨 Creații Artistice",
+    brandName: "🎨 LORE SI BIRDI STAU ",
     home: "Acasă",
     gallery: "Galerie",
     
