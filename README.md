@@ -54,15 +54,17 @@ Make sure the URL:
 
 ## Admin Access
 
-**The admin panel is hidden!**
+**⚠️ Admin panel is ONLY available in development mode!**
 
-Access it via: `https://yourdomain.com/admin/login`
-
-**Default Credentials:**
+### Local Development:
+- Access: `http://localhost:3000/admin/login`
 - Username: `admin`
 - Password: `admin123`
 
-⚠️ **Change these in production!**
+### Production (Deployed):
+- ❌ Admin panel is **disabled** for security
+- Manage items locally, then commit `items.json` to Git
+- See `ADMIN_ACCESS.md` for detailed workflow
 
 ---
 
@@ -81,6 +83,24 @@ npm start
 ```
 
 Visit: `http://localhost:3000`
+
+---
+
+## Managing Items (Production Workflow)
+
+Since admin is disabled in production:
+
+1. **Add/Edit items locally** using admin panel at `http://localhost:3000/admin/login`
+2. **Items save to** `backend/data/items.json`
+3. **Commit and push:**
+   ```bash
+   git add backend/data/items.json
+   git commit -m "Update items"
+   git push
+   ```
+4. **Render auto-deploys** your changes!
+
+See `ADMIN_ACCESS.md` for detailed instructions.
 
 ---
 

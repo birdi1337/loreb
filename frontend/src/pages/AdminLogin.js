@@ -1,30 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { useLanguage } from '../LanguageContext';
 import './AdminLogin.css';
 
-function AdminLogin() {
+function AdminLogin({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/admin/check`, { withCredentials: true });
-      if (response.data.isAuthenticated) {
-        navigate('/admin/dashboard');
-      }
-    } catch (error) {
-      console.log('Not authenticated');
-    }
-  };
+  const { t } = useLanguage();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,10 +23,10 @@ function AdminLogin() {
       );
 
       if (response.data.success) {
-        navigate('/admin/dashboard');
+        onLoginSuccess();
       }
     } catch (error) {
-      setError(error.response?.data?.error || 'Login failed. Please try again.');
+      setError(error.response?.data?.error || t('loginFailed'));
       setLoading(false);
     }
   };
@@ -51,34 +36,34 @@ function AdminLogin() {
       <div className="container">
         <div className="login-card">
           <div className="login-header">
-            <h1>Admin Login</h1>
-            <p>Enter your credentials to manage the portfolio</p>
+            <h1>{t('adminLogin')}</h1>
+            <p>{t('adminLoginSubtitle')}</p>
           </div>
 
           {error && <div className="error-message">{error}</div>}
 
           <form onSubmit={handleSubmit} className="login-form">
             <div className="input-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username">{t('username')}</label>
               <input
                 type="text"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                placeholder="Enter username"
+                placeholder={t('enterUsername')}
               />
             </div>
 
             <div className="input-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{t('password')}</label>
               <input
                 type="password"
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                placeholder="Enter password"
+                placeholder={t('enterPassword')}
               />
             </div>
 
@@ -87,15 +72,15 @@ function AdminLogin() {
               className="btn btn-primary login-btn"
               disabled={loading}
             >
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? t('loggingIn') : t('login')}
             </button>
           </form>
 
           <div className="login-info">
-            <p><strong>Default credentials:</strong></p>
+            <p><strong>{t('defaultCredentials')}</strong></p>
             <p>Username: admin</p>
             <p>Password: admin123</p>
-            <p className="warning">⚠️ Change these credentials in production!</p>
+            <p className="warning">{t('warningChangeCredentials')}</p>
           </div>
         </div>
       </div>

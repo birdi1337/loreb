@@ -3,9 +3,8 @@ node_modules/
 package-lock.json
 yarn.lock
 
-# Backend
-backend/data/
-backend/uploads/
+# Backend - Keep items.json but ignore other data
+backend/data/admin.json
 
 # Frontend build
 frontend/build/

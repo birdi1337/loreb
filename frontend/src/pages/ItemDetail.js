@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { useLanguage } from '../LanguageContext';
 import './ItemDetail.css';
 
 function ItemDetail() {
@@ -10,6 +11,7 @@ function ItemDetail() {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     fetchItem();
@@ -30,7 +32,7 @@ function ItemDetail() {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        <p>Loading item...</p>
+        <p>{t('loadingItem')}</p>
       </div>
     );
   }
@@ -39,9 +41,9 @@ function ItemDetail() {
     return (
       <div className="container">
         <div className="card" style={{ marginTop: '40px', textAlign: 'center' }}>
-          <h2>Item not found</h2>
+          <h2>{t('itemNotFound')}</h2>
           <button onClick={() => navigate('/gallery')} className="btn btn-primary">
-            Back to Gallery
+            {t('backToGallery')}
           </button>
         </div>
       </div>
@@ -52,7 +54,7 @@ function ItemDetail() {
     <div className="item-detail">
       <div className="container">
         <button onClick={() => navigate('/gallery')} className="back-button">
-          ← Back to Gallery
+          {t('backToGallery')}
         </button>
 
         <div className="detail-card">
@@ -80,31 +82,31 @@ function ItemDetail() {
           </div>
 
           <div className="detail-info">
-            <div className="category-badge">{item.category}</div>
+            <div className="category-badge">{t(`categories.${item.category}`)}</div>
             <h1 className="detail-title">{item.title}</h1>
             <p className="detail-price">${item.price.toFixed(2)}</p>
             
             {item.size && (
               <div className="detail-section">
-                <h3>Size</h3>
+                <h3>{t('size')}</h3>
                 <p>{item.size}</p>
               </div>
             )}
 
             <div className="detail-section">
-              <h3>Description</h3>
+              <h3>{t('description')}</h3>
               <p className="detail-description">{item.description}</p>
             </div>
 
             <div className="contact-section">
-              <h3>Interested in this piece?</h3>
-              <p>Contact me to purchase or discuss custom orders:</p>
+              <h3>{t('interestedTitle')}</h3>
+              <p>{t('interestedText')}</p>
               <div className="contact-buttons">
                 <a 
                   href={`mailto:artist@example.com?subject=Interest in ${item.title}&body=Hi, I'm interested in purchasing "${item.title}".`}
                   className="btn btn-primary"
                 >
-                  📧 Email Me
+                  {t('emailMe')}
                 </a>
                 <a 
                   href={`https://wa.me/1234567890?text=Hi, I'm interested in "${item.title}"`}
@@ -112,7 +114,7 @@ function ItemDetail() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  💬 WhatsApp
+                  {t('whatsapp')}
                 </a>
               </div>
             </div>

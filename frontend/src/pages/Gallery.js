@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { useLanguage } from '../LanguageContext';
 import './Gallery.css';
 
 function Gallery() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const { t } = useLanguage();
 
   useEffect(() => {
     fetchItems();
@@ -34,7 +36,7 @@ function Gallery() {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        <p>Loading gallery...</p>
+        <p>{t('loadingGallery')}</p>
       </div>
     );
   }
@@ -42,11 +44,11 @@ function Gallery() {
   return (
     <div className="gallery">
       <div className="container">
-        <h1 className="gallery-title">Gallery</h1>
-        <p className="gallery-subtitle">Browse my collection of unique artwork and painted clothing</p>
+        <h1 className="gallery-title">{t('galleryTitle')}</h1>
+        <p className="gallery-subtitle">{t('gallerySubtitle')}</p>
 
         <div className="filter-section">
-          <span className="filter-label">Filter by:</span>
+          <span className="filter-label">{t('filterBy')}</span>
           <div className="filter-buttons">
             {categories.map(category => (
               <button
@@ -54,7 +56,7 @@ function Gallery() {
                 className={`filter-btn ${filter === category ? 'active' : ''}`}
                 onClick={() => setFilter(category)}
               >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
+                {t(category)}
               </button>
             ))}
           </div>
@@ -62,7 +64,7 @@ function Gallery() {
 
         {filteredItems.length === 0 ? (
           <div className="no-items">
-            <p>No items found in this category.</p>
+            <p>{t('noItems')}</p>
           </div>
         ) : (
           <div className="gallery-grid">
@@ -75,12 +77,12 @@ function Gallery() {
                     className="item-image"
                   />
                   <div className="item-overlay">
-                    <span className="view-details">View Details</span>
+                    <span className="view-details">{t('viewDetails')}</span>
                   </div>
                 </div>
                 <div className="item-info">
                   <h3 className="item-title">{item.title}</h3>
-                  <p className="item-category">{item.category}</p>
+                  <p className="item-category">{t(`categories.${item.category}`)}</p>
                   <p className="item-price">${item.price.toFixed(2)}</p>
                 </div>
               </Link>

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1704567890123",
+    "title": "Sunset Dreams T-Shirt",
+    "description": "Hand-painted cotton t-shirt featuring a vibrant sunset gradient with palm tree silhouettes. Each brushstroke is carefully applied to create a unique wearable art piece. The colors blend from deep purple to orange and pink, creating a dreamy tropical vibe.\n\nMaterial: 100% organic cotton\nCare: Hand wash cold, air dry\n\nThis is a one-of-a-kind piece - no two are exactly alike!",
+    "price": 45.00,
+    "category": "t-shirt",
+    "size": "M (can be made in other sizes)",
+    "images": [
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80",
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80"
+    ],
+    "createdAt": "2026-01-05T10:30:00.000Z"
+  },
+  {
+    "id": "1704567890124",
+    "title": "Abstract Ocean Canvas",
+    "description": "Original acrylic painting on 16x20 inch canvas. This piece captures the movement and energy of ocean waves through bold brushstrokes and a vibrant color palette of blues, teals, and white foam.\n\nInspired by the powerful beauty of the sea, this artwork brings a sense of calm and energy to any space. The textured application of paint creates depth and dimension.\n\nCanvas is gallery-wrapped and ready to hang. Signed on the back by the artist.",
+    "price": 180.00,
+    "category": "painting",
+    "size": "16 x 20 inches",
+    "images": [
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&q=80",
+      "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80",
+      "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&q=80"
+    ],
+    "createdAt": "2026-01-03T14:15:00.000Z"
+  }
+]

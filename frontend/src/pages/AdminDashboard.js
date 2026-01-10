@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
+import { useLanguage } from '../LanguageContext';
 import './AdminDashboard.css';
 
-function AdminDashboard() {
+function AdminDashboard({ onLogout }) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -22,22 +23,11 @@ function AdminDashboard() {
   const [imageUrls, setImageUrls] = useState(['']);
   
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   useEffect(() => {
-    checkAuth();
     fetchItems();
   }, []);
-
-  const checkAuth = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/admin/check`, { withCredentials: true });
-      if (!response.data.isAuthenticated) {
-        navigate('/admin/login');
-      }
-    } catch (error) {
-      navigate('/admin/login');
-    }
-  };
 
   const fetchItems = async () => {
     try {
@@ -53,7 +43,7 @@ function AdminDashboard() {
   const handleLogout = async () => {
     try {
       await axios.post(`${API_URL}/api/admin/logout`, {}, { withCredentials: true });
-      navigate('/admin/login');
+      onLogout();
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -88,11 +78,10 @@ function AdminDashboard() {
     setError('');
     setSuccess('');
 
-    // Filter out empty URLs
     const validUrls = imageUrls.filter(url => url.trim() !== '');
     
     if (validUrls.length === 0) {
-      setError('Please add at least one image URL');
+      setError(t('addAtLeastOneImage'));
       return;
     }
 
@@ -106,12 +95,12 @@ function AdminDashboard() {
         await axios.put(`${API_URL}/api/admin/items/${editingItem.id}`, data, {
           withCredentials: true
         });
-        setSuccess('Item updated successfully!');
+        setSuccess(t('itemUpdated'));
       } else {
         await axios.post(`${API_URL}/api/admin/items`, data, {
           withCredentials: true
         });
-        setSuccess('Item created successfully!');
+        setSuccess(t('itemCreated'));
       }
       
       resetForm();
@@ -137,13 +126,13 @@ function AdminDashboard() {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this item?')) {
+    if (!window.confirm(t('deleteConfirm'))) {
       return;
     }
 
     try {
       await axios.delete(`${API_URL}/api/admin/items/${id}`, { withCredentials: true });
-      setSuccess('Item deleted successfully!');
+      setSuccess(t('itemDeleted'));
       fetchItems();
       setTimeout(() => setSuccess(''), 3000);
     } catch (error) {
@@ -168,7 +157,7 @@ function AdminDashboard() {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        <p>Loading dashboard...</p>
+        <p>{t('loadingDashboard')}</p>
       </div>
     );
   }
@@ -177,13 +166,13 @@ function AdminDashboard() {
     <div className="admin-dashboard">
       <div className="container">
         <div className="dashboard-header">
-          <h1>Admin Dashboard</h1>
+          <h1>{t('adminDashboard')}</h1>
           <div className="header-actions">
             <button onClick={() => navigate('/gallery')} className="btn btn-secondary">
-              View Gallery
+              {t('viewGalleryBtn')}
             </button>
             <button onClick={handleLogout} className="btn btn-danger">
-              Logout
+              {t('logout')}
             </button>
           </div>
         </div>
@@ -197,16 +186,16 @@ function AdminDashboard() {
               onClick={() => setShowForm(!showForm)} 
               className="btn btn-primary"
             >
-              {showForm ? 'Cancel' : '+ Add New Item'}
+              {showForm ? t('cancel') : t('addNewItem')}
             </button>
           </div>
 
           {showForm && (
             <div className="card form-card">
-              <h2>{editingItem ? 'Edit Item' : 'Add New Item'}</h2>
+              <h2>{editingItem ? t('editItem') : t('addItem')}</h2>
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                  <label htmlFor="title">Title *</label>
+                  <label htmlFor="title">{t('titleRequired')}</label>
                   <input
                     type="text"
                     id="title"
@@ -218,7 +207,7 @@ function AdminDashboard() {
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="description">Description *</label>
+                  <label htmlFor="description">{t('descriptionRequired')}</label>
                   <textarea
                     id="description"
                     name="description"
@@ -230,7 +219,7 @@ function AdminDashboard() {
 
                 <div className="form-row">
                   <div className="input-group">
-                    <label htmlFor="price">Price ($) *</label>
+                    <label htmlFor="price">{t('priceRequired')}</label>
                     <input
                       type="number"
                       id="price"
@@ -244,7 +233,7 @@ function AdminDashboard() {
                   </div>
 
                   <div className="input-group">
-                    <label htmlFor="category">Category *</label>
+                    <label htmlFor="category">{t('categoryRequired')}</label>
                     <select
                       id="category"
                       name="category"
@@ -252,32 +241,31 @@ function AdminDashboard() {
                       onChange={handleInputChange}
                       required
                     >
-                      <option value="painting">Painting</option>
-                      <option value="t-shirt">T-Shirt</option>
-                      <option value="hoodie">Hoodie</option>
-                      <option value="jacket">Jacket</option>
-                      <option value="other">Other</option>
+                      <option value="painting">{t('categories.painting')}</option>
+                      <option value="t-shirt">{t('categories.t-shirt')}</option>
+                      <option value="hoodie">{t('categories.hoodie')}</option>
+                      <option value="jacket">{t('categories.jacket')}</option>
+                      <option value="other">{t('categories.other')}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="input-group">
-                  <label htmlFor="size">Size (optional)</label>
+                  <label htmlFor="size">{t('sizeLabel')}</label>
                   <input
                     type="text"
                     id="size"
                     name="size"
                     value={formData.size}
                     onChange={handleInputChange}
-                    placeholder="e.g., S, M, L, XL or dimensions"
+                    placeholder={t('sizePlaceholder')}
                   />
                 </div>
 
                 <div className="input-group">
-                  <label>Image URLs * (Max 5)</label>
+                  <label>{t('imageUrls')}</label>
                   <p className="help-text">
-                    Upload your images to a cloud service (Imgur, Cloudinary, Google Drive, etc.) 
-                    and paste the public URLs here. Make sure the links end with .jpg, .png, or .webp
+                    {t('imageUrlsHelp')}
                   </p>
                   
                   {imageUrls.map((url, index) => (
@@ -286,7 +274,7 @@ function AdminDashboard() {
                         type="url"
                         value={url}
                         onChange={(e) => handleImageUrlChange(index, e.target.value)}
-                        placeholder="https://example.com/image.jpg"
+                        placeholder={t('imageUrlPlaceholder')}
                         className="image-url-input"
                       />
                       {imageUrls.length > 1 && (
@@ -307,17 +295,17 @@ function AdminDashboard() {
                       onClick={addImageUrlField}
                       className="btn btn-secondary add-url-btn"
                     >
-                      + Add Another Image URL
+                      {t('addAnotherUrl')}
                     </button>
                   )}
                 </div>
 
                 <div className="form-actions">
                   <button type="submit" className="btn btn-primary">
-                    {editingItem ? 'Update Item' : 'Create Item'}
+                    {editingItem ? t('updateItem') : t('createItem')}
                   </button>
                   <button type="button" onClick={resetForm} className="btn btn-secondary">
-                    Cancel
+                    {t('cancel')}
                   </button>
                 </div>
               </form>
@@ -325,11 +313,11 @@ function AdminDashboard() {
           )}
 
           <div className="items-section">
-            <h2>Your Items ({items.length})</h2>
+            <h2>{t('yourItems')} ({items.length})</h2>
             
             {items.length === 0 ? (
               <div className="card no-items-card">
-                <p>No items yet. Add your first item!</p>
+                <p>{t('noItemsYet')}</p>
               </div>
             ) : (
               <div className="items-grid">
@@ -340,15 +328,15 @@ function AdminDashboard() {
                     </div>
                     <div className="admin-item-info">
                       <h3>{item.title}</h3>
-                      <p className="item-category">{item.category}</p>
+                      <p className="item-category">{t(`categories.${item.category}`)}</p>
                       <p className="item-price">${item.price.toFixed(2)}</p>
                     </div>
                     <div className="admin-item-actions">
                       <button onClick={() => handleEdit(item)} className="btn btn-secondary">
-                        Edit
+                        {t('edit')}
                       </button>
                       <button onClick={() => handleDelete(item.id)} className="btn btn-danger">
-                        Delete
+                        {t('delete')}
                       </button>
                     </div>
                   </div>

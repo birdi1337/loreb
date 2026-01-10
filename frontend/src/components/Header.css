@@ -56,9 +56,10 @@
   transform: translateY(-2px);
 }
 
-.admin-link {
+.language-toggle {
   border: 2px solid rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.1);
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {

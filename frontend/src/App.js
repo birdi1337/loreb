@@ -4,11 +4,12 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import ItemDetail from './pages/ItemDetail';
-import AdminLogin from './pages/AdminLogin';
-import AdminDashboard from './pages/AdminDashboard';
+import Admin from './pages/Admin';
 import './App.css';
 
 function App() {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+
   return (
     <Router>
       <div className="App">
@@ -17,8 +18,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/item/:id" element={<ItemDetail />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          
+          {/* Admin route only available in development */}
+          {isDevelopment && (
+            <Route path="/admin" element={<Admin />} />
+          )}
         </Routes>
       </div>
     </Router>
