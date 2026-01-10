@@ -204,6 +204,19 @@ app.delete('/api/admin/items/:id', isAuthenticated, (req, res) => {
   }
 });
 
+// Serve React frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const frontendBuildPath = path.join(__dirname, '../frontend/build');
+  
+  // Serve static files from React build
+  app.use(express.static(frontendBuildPath));
+  
+  // All non-API routes serve index.html (for React Router)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
+  });
+}
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
