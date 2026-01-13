@@ -1,41 +1,104 @@
 export default {
-  // Header
+  // ============================================
+  // HEADER
+  // ============================================
   brandName: "🎨 LoreB Artist",
   home: "Acasă",
   gallery: "Galerie",
 
-  // Home Page
-  heroTitle: "Bun venit în Lumea Mea Artistică",
-  heroSubtitle: "Descoperă îmbrăcăminte pictată manual și artă originală unică",
-  heroDescription:
-    "Fiecare piesă este creată cu pasiune și creativitate, transformând obiectele de zi cu zi în artă de purtat și aducând culoare în viața ta.",
-  browseGallery: "Vezi Galeria",
+  // ============================================
+  // HOME PAGE
+  // ============================================
+  // Hero Section
+  handmadeWithLove: "Creat Manual cu Dragoste",
+  heroTitle: "Artă Unică Pictată Manual",
+  heroSubtitle: "Transformă-ți stilul cu lucrări artistice personalizate",
+  heroDescription: "Fiecare piesă este realizată cu grijă manual, făcând-o cu adevărat unică și specială.",
+  browseGallery: "Explorează Galeria",
   learnMore: "Află Mai Multe",
+  
+  // Hero Stats
+  artworks: "Lucrări",
+  categories: "Categorii",
+  handmade: "Manual",
 
-  // Features
+  // Features Section
   whatIOffer: "Ce Ofer",
-  customClothing: "Îmbrăcăminte Pictată",
-  customClothingDesc: "Design-uri unice pictate manual pe tricouri, hanorace, jachete și multe altele.",
+  discoverUnique: "Descoperă piese unice create special pentru tine",
+  customClothing: "Îmbrăcăminte Personalizată",
+  customClothingDesc: "Design-uri pictate manual pe tricouri, hanorace și multe altele. Fiecare piesă este unică și realizată la comandă.",
   originalArt: "Artă Originală",
-  originalArtDesc: "Picturi pe pânză, desene și lucrări de artă creată cu dragoste.",
+  originalArtDesc: "Picturi frumoase pe pânză. Perfecte pentru casa ta sau ca un cadou special.",
   madeToOrder: "La Comandă",
-  madeToOrderDesc: "Contactează-mă pentru design-uri personalizate.",
+  madeToOrderDesc: "Comenzi personalizate disponibile. Adu-ți viziunea la viață cu artă personalizată.",
+  popular: "Popular",
 
-  // Gallery
-  galleryTitle: "Galerie",
+  // Featured Items Section
+  latestWork: "Lucrări Recente",
+  checkOutNewest: "Descoperă cele mai noi creații ale mele",
+  viewItem: "Vezi Articol",
+  viewAllItems: "Vezi Toate Articolele",
+
+  // Process Section
+  howItWorks: "Cum Funcționează",
+  simpleProcess: "Pași simpli pentru a-ți obține piesa personalizată",
+  browseSelect: "Explorează și Alege",
+  browseSelectDesc: "Explorează galeria și găsește o piesă care îți place",
+  contactMe: "Contactează-mă",
+  contactMeDesc: "Ia legătura pentru a discuta personalizări și detalii",
+  receiveArt: "Primește Arta Ta",
+  receiveArtDesc: "Piesa ta personalizată este creată și livrată la tine",
+
+  // CTA Section
+  ctaTitle: "Gata să Începi?",
+  ctaDescription: "Explorează galeria și găsește piesa ta perfectă de artă astăzi",
+  viewGallery: "Vezi Galeria",
+
+  // ============================================
+  // GALLERY PAGE
+  // ============================================
+  galleryTitle: "Galerie de Artă",
   gallerySubtitle: "Explorează colecția mea de artă unică și îmbrăcăminte pictată",
-  filterBy: "Filtrează după:",
+  
+  // Filters & Sort
+  filterBy: "Filtrează după",
+  sortBy: "Sortează după",
+  newest: "Cele Mai Noi",
+  oldest: "Cele Mai Vechi",
+  priceLowHigh: "Preț: Mic la Mare",
+  priceHighLow: "Preț: Mare la Mic",
+  
+  // Stats
+  totalItems: "articole",
+  filtered: "filtrate",
+  
+  // Categories
   all: "Toate",
   painting: "Pictură",
   "t-shirt": "Tricou",
   hoodie: "Hanorac",
   jacket: "Jachetă",
   other: "Altele",
-  noItems: "Nu s-au găsit articole în această categorie.",
+  
+  // Gallery Items
   viewDetails: "Vezi Detalii",
+  new: "Nou",
+  imageError: "Imagine indisponibilă",
+  
+  // Empty State
+  noItems: "Nu s-au găsit articole",
+  noItemsTitle: "Nu s-au găsit articole",
+  noItemsMessage: "Încearcă să schimbi filtrele",
+  clearFilters: "Curăță Filtrele",
+  
+  // Loading
   loadingGallery: "Se încarcă galeria...",
+  errorLoadingGallery: "Eroare la încărcarea galeriei",
+  tryAgain: "Încearcă Din Nou",
 
-  // Item Detail
+  // ============================================
+  // ITEM DETAIL PAGE
+  // ============================================
   backToGallery: "← Înapoi la Galerie",
   size: "Dimensiune",
   description: "Descriere",
@@ -45,8 +108,13 @@ export default {
   whatsapp: "💬 WhatsApp",
   itemNotFound: "Articolul nu a fost găsit",
   loadingItem: "Se încarcă articolul...",
+  shareItem: "Distribuie",
+  addToFavorites: "Adaugă la Favorite",
 
-  // Admin
+  // ============================================
+  // ADMIN
+  // ============================================
+  // Login
   adminLogin: "Autentificare Admin",
   adminLoginSubtitle: "Introdu credențialele pentru a gestiona portofoliul",
   username: "Nume utilizator",
@@ -57,51 +125,102 @@ export default {
   loggingIn: "Se autentifică...",
   defaultCredentials: "Credențiale implicite:",
   warningChangeCredentials: "⚠️ Schimbă aceste credențiale în producție!",
+  
+  // Dashboard
   adminDashboard: "Panou Admin",
   viewGalleryBtn: "Vezi Galeria",
   logout: "Deconectare",
   addNewItem: "+ Adaugă Articol Nou",
+  
+  // Form
   cancel: "Anulează",
   editItem: "Editează Articol",
   addItem: "Adaugă Articol Nou",
-
-  // Form
   title: "Titlu",
   titleRequired: "Titlu *",
   descriptionLabel: "Descriere",
   descriptionRequired: "Descriere *",
-  price: "Preț ($)",
-  priceRequired: "Preț ($) *",
+  price: "Preț (RON)",
+  priceRequired: "Preț (RON) *",
   category: "Categorie",
   categoryRequired: "Categorie *",
   sizeLabel: "Dimensiune (opțional)",
   sizePlaceholder: "ex: S, M, L, XL sau dimensiuni",
   imageUrls: "URL-uri Imagini * (Max 5)",
-  imageUrlsHelp:
-    "Încarcă imaginile pe un serviciu cloud și inserează link-urile publice. Se termină cu .jpg, .png sau .webp",
+  imageUrlsHelp: "Încarcă imaginile pe un serviciu cloud și inserează link-urile publice. Trebuie să se termine cu .jpg, .png sau .webp",
   imageUrlPlaceholder: "https://example.com/imagine.jpg",
   addAnotherUrl: "+ Adaugă Alt URL Imagine",
-
+  
   // Actions
   createItem: "Creează Articol",
   updateItem: "Actualizează Articol",
+  saving: "Se salvează...",
   edit: "Editează",
   delete: "Șterge",
-
+  confirmDelete: "Confirmă Ștergerea",
+  
   // Messages
-  itemCreated: "Articol creat cu succes!",
-  itemUpdated: "Articol actualizat cu succes!",
-  itemDeleted: "Articol șters cu succes!",
-  deleteConfirm: "Ești sigur că vrei să ștergi acest articol?",
+  itemCreated: "✓ Articol creat cu succes!",
+  itemUpdated: "✓ Articol actualizat cu succes!",
+  itemDeleted: "✓ Articol șters cu succes!",
+  deleteConfirm: "Ești sigur că vrei să ștergi acest articol? Această acțiune nu poate fi anulată.",
   addAtLeastOneImage: "Te rog adaugă cel puțin un URL de imagine",
   loginFailed: "Autentificare eșuată. Te rog încearcă din nou.",
+  errorCreatingItem: "Eroare la crearea articolului",
+  errorUpdatingItem: "Eroare la actualizarea articolului",
+  errorDeletingItem: "Eroare la ștergerea articolului",
+  
+  // Validation
+  fieldRequired: "Acest câmp este obligatoriu",
+  invalidUrl: "URL invalid",
+  invalidPrice: "Preț invalid",
+  titleTooShort: "Titlul trebuie să aibă cel puțin 3 caractere",
+  descriptionTooShort: "Descrierea trebuie să aibă cel puțin 10 caractere",
 
-  // Categories
+  // ============================================
+  // CATEGORIES (pentru traducere)
+  // ============================================
   categories: {
+    all: "Toate",
     painting: "Pictură",
-    "t-shirt": "Tricou",
+    t-shirt: "Tricou",
     hoodie: "Hanorac",
     jacket: "Jachetă",
     other: "Altele"
-  }
+  },
+
+  // ============================================
+  // COMMON / UTILITY
+  // ============================================
+  loading: "Se încarcă...",
+  error: "Eroare",
+  success: "Succes",
+  warning: "Avertisment",
+  info: "Informație",
+  close: "Închide",
+  save: "Salvează",
+  back: "Înapoi",
+  next: "Următorul",
+  previous: "Anterior",
+  search: "Caută",
+  noResults: "Nu s-au găsit rezultate",
+  
+  // Dates
+  today: "Astăzi",
+  yesterday: "Ieri",
+  thisWeek: "Săptămâna aceasta",
+  thisMonth: "Luna aceasta",
+  
+  // Contact
+  contactTitle: "Contactează-mă",
+  email: "Email",
+  phone: "Telefon",
+  message: "Mesaj",
+  sendMessage: "Trimite Mesaj",
+  
+  // Footer (pentru viitor)
+  followMe: "Urmărește-mă",
+  allRightsReserved: "Toate drepturile rezervate",
+  privacyPolicy: "Politica de Confidențialitate",
+  termsOfService: "Termeni și Condiții",
 };
