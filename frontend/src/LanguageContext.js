@@ -1,49 +1,32 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { translations, defaultLanguage } from './translations';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { t as translate, setLanguage as setI18nLanguage } from "./i18n";
 
 const LanguageContext = createContext();
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within LanguageProvider');
+    throw new Error("useLanguage must be used within LanguageProvider");
   }
   return context;
 };
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    // Get from localStorage or use default (Romanian)
-    return localStorage.getItem('language') || defaultLanguage;
+    return localStorage.getItem("language") || "ro";
   });
 
   useEffect(() => {
-    // Save to localStorage when language changes
-    localStorage.setItem('language', language);
+    localStorage.setItem("language", language);
+    setI18nLanguage(language); // <-- asta conectează React cu i18n
   }, [language]);
 
   const t = (key) => {
-    // Get translation for current language
-    const keys = key.split('.');
-    let value = translations[language];
-    
-    for (const k of keys) {
-      value = value?.[k];
-    }
-    
-    // Fallback to English if translation not found
-    if (value === undefined) {
-      value = translations['en'];
-      for (const k of keys) {
-        value = value?.[k];
-      }
-    }
-    
-    return value || key;
+    return translate(key);
   };
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'ro' ? 'en' : 'ro');
+    setLanguage((prev) => (prev === "ro" ? "en" : "ro"));
   };
 
   return (
