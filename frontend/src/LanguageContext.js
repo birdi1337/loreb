@@ -18,19 +18,17 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("language", language);
-    setI18nLanguage(language); // <-- asta conectează React cu i18n
+    setI18nLanguage(language);
   }, [language]);
 
-  const t = (key) => {
-    return translate(key);
-  };
+  const t = (key) => translate(key);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "ro" ? "en" : "ro"));
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );

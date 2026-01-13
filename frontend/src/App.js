@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
@@ -18,11 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/item/:id" element={<ItemDetail />} />
-          
-          {/* Admin route only available in development */}
-          {isDevelopment && (
-            <Route path="/admin" element={<Admin />} />
-          )}
+
+          {isDevelopment && <Route path="/admin" element={<Admin />} />}
         </Routes>
       </div>
     </Router>
