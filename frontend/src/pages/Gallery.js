@@ -189,7 +189,7 @@ function Gallery() {
   );
 }
 
-// Componentă separată pentru fiecare item (optimizare)
+// 
 const GalleryItem = React.memo(({ item, t }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
