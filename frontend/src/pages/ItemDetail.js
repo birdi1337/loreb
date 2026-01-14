@@ -15,7 +15,8 @@ function ItemDetail() {
 
   useEffect(() => {
   fetchItem();
-}, [fetchItem]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [id]);
 
   const fetchItem = async () => {
     try {
@@ -103,13 +104,13 @@ function ItemDetail() {
               <p>{t('interestedText')}</p>
               <div className="contact-buttons">
                 <a 
-                  href={`mailto:artist@example.com?subject=Interest in ${item.title}&body=Hi, I'm interested in purchasing "${item.title}".`}
+                  href={`mailto:loreb.artist@gmail.com?subject=Interest in ${item.title}&body=Hi, I'm interested in purchasing "${item.title}".`}
                   className="btn btn-primary"
                 >
                   {t('emailMe')}
                 </a>
                 <a 
-                  href={`https://wa.me/1234567890?text=Hi, I'm interested in "${item.title}"`}
+                  href={`https://wa.me/+40735416890text=Hi, I'm interested in "${item.title}"`}
                   className="btn btn-secondary"
                   target="_blank"
                   rel="noopener noreferrer"

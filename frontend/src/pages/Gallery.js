@@ -13,9 +13,9 @@ function Gallery() {
   const [sortBy, setSortBy] = useState('newest'); // newest, oldest, price-low, price-high
   const { t } = useLanguage();
 
-  useEffect(() => {
+ useEffect(() => {
   fetchItems();
-}, [fetchItems]);
+}, []);
 
   const fetchItems = async () => {
     setLoading(true);
