@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../config';
-import { useLanguage } from '../LanguageContext';
 import './AdminDashboard.css';
 
-function AdminDashboard({ onLogout }) {
+function AdminDashboard({ onLogout, t }) { // t primit ca prop
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -23,7 +22,6 @@ function AdminDashboard({ onLogout }) {
   const [imageUrls, setImageUrls] = useState(['']);
   
   const navigate = useNavigate();
-  const { t } = useLanguage();
 
   useEffect(() => {
     fetchItems();
@@ -40,7 +38,7 @@ function AdminDashboard({ onLogout }) {
     }
   };
 
-  const handleLogout = async () => {
+  const handleLogoutClick = async () => {
     try {
       await axios.post(`${API_URL}/api/admin/logout`, {}, { withCredentials: true });
       onLogout();
@@ -50,10 +48,7 @@ function AdminDashboard({ onLogout }) {
   };
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleImageUrlChange = (index, value) => {
@@ -63,9 +58,7 @@ function AdminDashboard({ onLogout }) {
   };
 
   const addImageUrlField = () => {
-    if (imageUrls.length < 5) {
-      setImageUrls([...imageUrls, '']);
-    }
+    if (imageUrls.length < 5) setImageUrls([...imageUrls, '']);
   };
 
   const removeImageUrlField = (index) => {
@@ -79,30 +72,22 @@ function AdminDashboard({ onLogout }) {
     setSuccess('');
 
     const validUrls = imageUrls.filter(url => url.trim() !== '');
-    
     if (validUrls.length === 0) {
       setError(t('addAtLeastOneImage'));
       return;
     }
 
-    const data = {
-      ...formData,
-      images: validUrls
-    };
+    const data = { ...formData, images: validUrls };
 
     try {
       if (editingItem) {
-        await axios.put(`${API_URL}/api/admin/items/${editingItem.id}`, data, {
-          withCredentials: true
-        });
+        await axios.put(`${API_URL}/api/admin/items/${editingItem.id}`, data, { withCredentials: true });
         setSuccess(t('itemUpdated'));
       } else {
-        await axios.post(`${API_URL}/api/admin/items`, data, {
-          withCredentials: true
-        });
+        await axios.post(`${API_URL}/api/admin/items`, data, { withCredentials: true });
         setSuccess(t('itemCreated'));
       }
-      
+
       resetForm();
       fetchItems();
       setTimeout(() => setSuccess(''), 3000);
@@ -126,9 +111,7 @@ function AdminDashboard({ onLogout }) {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm(t('deleteConfirm'))) {
-      return;
-    }
+    if (!window.confirm(t('deleteConfirm'))) return;
 
     try {
       await axios.delete(`${API_URL}/api/admin/items/${id}`, { withCredentials: true });
@@ -141,13 +124,7 @@ function AdminDashboard({ onLogout }) {
   };
 
   const resetForm = () => {
-    setFormData({
-      title: '',
-      description: '',
-      price: '',
-      category: 'painting',
-      size: ''
-    });
+    setFormData({ title: '', description: '', price: '', category: 'painting', size: '' });
     setImageUrls(['']);
     setEditingItem(null);
     setShowForm(false);
@@ -171,7 +148,7 @@ function AdminDashboard({ onLogout }) {
             <button onClick={() => navigate('/gallery')} className="btn btn-secondary">
               {t('viewGalleryBtn')}
             </button>
-            <button onClick={handleLogout} className="btn btn-danger">
+            <button onClick={handleLogoutClick} className="btn btn-danger">
               {t('logout')}
             </button>
           </div>
@@ -264,9 +241,7 @@ function AdminDashboard({ onLogout }) {
 
                 <div className="input-group">
                   <label>{t('imageUrls')}</label>
-                  <p className="help-text">
-                    {t('imageUrlsHelp')}
-                  </p>
+                  <p className="help-text">{t('imageUrlsHelp')}</p>
                   
                   {imageUrls.map((url, index) => (
                     <div key={index} className="image-url-input-group">

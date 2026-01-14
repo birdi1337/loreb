@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../config';
-import { useLanguage } from '../LanguageContext';
+import { useLanguage } from '../LanguageContext'; // import corect
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './AdminDashboard';
 
 function Admin() {
+  const { t } = useLanguage(); // hook apelat în componentă
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -36,16 +37,15 @@ function Admin() {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        <p>Loading...</p>
+        <p>{t('loading')}</p>
       </div>
     );
   }
 
-  // Show login if not authenticated, dashboard if authenticated
   return isAuthenticated ? (
-    <AdminDashboard onLogout={handleLogout} />
+    <AdminDashboard onLogout={handleLogout} t={t} />
   ) : (
-    <AdminLogin onLoginSuccess={handleLoginSuccess} />
+    <AdminLogin onLoginSuccess={handleLoginSuccess} t={t} />
   );
 }
 

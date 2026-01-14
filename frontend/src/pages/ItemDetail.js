@@ -14,8 +14,8 @@ function ItemDetail() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    fetchItem();
-  }, [id]);
+  fetchItem();
+}, [fetchItem]);
 
   const fetchItem = async () => {
     try {

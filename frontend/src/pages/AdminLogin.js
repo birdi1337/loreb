@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../config';
-import { useLanguage } from '../LanguageContext';
 import './AdminLogin.css';
 
-function AdminLogin({ onLoginSuccess }) {
+function AdminLogin({ onLoginSuccess, t }) { // t primit ca prop
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { t } = useLanguage();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,16 +15,20 @@ function AdminLogin({ onLoginSuccess }) {
     setLoading(true);
 
     try {
-      const response = await axios.post(`${API_URL}/api/admin/login`, 
+      const response = await axios.post(
+        `${API_URL}/api/admin/login`,
         { username, password },
         { withCredentials: true }
       );
 
       if (response.data.success) {
         onLoginSuccess();
+      } else {
+        setError(t('loginFailed'));
       }
-    } catch (error) {
-      setError(error.response?.data?.error || t('loginFailed'));
+    } catch (err) {
+      setError(err.response?.data?.error || t('loginFailed'));
+    } finally {
       setLoading(false);
     }
   };
@@ -67,8 +69,8 @@ function AdminLogin({ onLoginSuccess }) {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn btn-primary login-btn"
               disabled={loading}
             >

@@ -14,8 +14,8 @@ function Gallery() {
   const { t } = useLanguage();
 
   useEffect(() => {
-    fetchItems();
-  }, []);
+  fetchItems();
+}, [fetchItems]);
 
   const fetchItems = async () => {
     setLoading(true);
